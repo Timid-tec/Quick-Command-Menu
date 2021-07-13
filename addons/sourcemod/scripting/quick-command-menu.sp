@@ -7,7 +7,7 @@ public Plugin myinfo =
 {
 	name = "Quick Command Menu", 
 	author = PLUGIN_AUTHOR, 
-	description = "Increase HE Nade Damge and radius", 
+	description = "Quick Command Menu configure plugin all inside (configs/quickcommands.cfg)", 
 	version = PLUGIN_VERSION, 
 	url = ""
 }
