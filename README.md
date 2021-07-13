@@ -6,6 +6,9 @@ A source mod plugin simply made to make a quick-command menu easily changeable.
 - command: Fake client command
 - chatprint: Print chat message
 
+# Usable colors
+- {default}, {darkred}, {green}, {red}, {blue}, {lime}, {lightred}, {purple}, {grey}, {yellow}, {orange}. {bluegrey}, {lightblue}, {darkblue}, {grey2}, {lightred2}
+
 # Game Supported
 - CS:GO
 
