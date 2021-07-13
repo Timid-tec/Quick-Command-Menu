@@ -53,8 +53,10 @@ public Action Menu_QuickCommand(int client, int args)
 	
 	if (!KvGotoFirstSubKey(kv))
 	{
-		return Plugin_Continue;
+		SetFailState("Unable to find clantags section in file %s", qcpath);
+		return Plugin_Handled;
 	}
+	
 	char QuickCommandNumber[64];
 	char QuickCommandName[256];
 	
@@ -71,7 +73,7 @@ public Action Menu_QuickCommand(int client, int args)
 	
 	DisplayMenuAtItem(QuickCommandMenu, client, args, 15);
 	
-	return Plugin_Handled;
+	return Plugin_Continue;
 }
 
 public int MenuHandler1(Handle menu, MenuAction action, int param1, int param2)
