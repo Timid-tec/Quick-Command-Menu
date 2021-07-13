@@ -1,8 +1,10 @@
 # Quick-Command-Menu
 A source mod plugin simply made to make a quick-command menu easily changeable.
 
-# Custom Features
-
+# Custom Types for menu
+- name: Item name to display in menu
+- command: Fake client command
+- chatprint: Print chat message
 
 # Game Supported
 - CS:GO
