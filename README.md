@@ -12,6 +12,21 @@ A source mod plugin simply made to make a quick-command menu easily changeable.
 # How to Install
 - Donwload Quick-Command-Menu.smx and put into /csgo/addons/sourcemod/plugins
 - Configure settings by editing /addons/sourcemod/configs/quickcommands.cfg
+# Example
+
+    "quickcommand"
+    {
+        "1"
+        {
+            "name" "!rules"
+            "command" "sm_rules"
+        }
+        "2"
+        {
+          "name" "!discord"
+          "chatprint" "{grey}「{purple}MoonGlow{grey}」 {purple}https://discord.com/invite/Y9t9tA3"
+      }
+    }
 
 # Updates
 
