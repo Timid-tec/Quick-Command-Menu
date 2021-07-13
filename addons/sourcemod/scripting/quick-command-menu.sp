@@ -38,7 +38,7 @@ Item = 0;
 
 public void OnPluginStart()
 {
-	RegConsoleCmd("sm_qctest", Menu_QuickCommand);
+	RegConsoleCmd("sm_qc", Menu_QuickCommand, "Opens the Quick-Command menu");
 	
 	BuildPath(Path_SM, qcpath, sizeof(qcpath), "configs/quickcommands.cfg");
 }
