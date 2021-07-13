@@ -1,3 +1,20 @@
+/*  [CS:GO] Quick-Command-Menu, quick menu for easy configuration.
+ *
+ *  Copyright (C) 2021 Mr.Timid // timidexempt@gmail.com
+ * 
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) 
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT 
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with 
+ * this program. If not, see http://www.gnu.org/licenses/.
+ */
+
 #include <sourcemod>
 #include <cstrike>
 #include <timid>
@@ -9,7 +26,7 @@ public Plugin myinfo =
 	author = PLUGIN_AUTHOR, 
 	description = "Quick Command Menu configure plugin all inside (configs/quickcommands.cfg)", 
 	version = PLUGIN_VERSION, 
-	url = ""
+	url = "https://steamcommunity.com/id/MrTimid/"
 }
 
 
@@ -21,12 +38,12 @@ Item = 0;
 
 public void OnPluginStart()
 {
-	RegConsoleCmd("sm_qctest", Menu_Test1);
+	RegConsoleCmd("sm_qctest", Menu_QuickCommand);
 	
 	BuildPath(Path_SM, qcpath, sizeof(qcpath), "configs/quickcommands.cfg");
 }
 
-public Action Menu_Test1(int client, int args)
+public Action Menu_QuickCommand(int client, int args)
 {
 	Handle QuickCommandMenu = CreateMenu(MenuHandler1);
 	SetMenuTitle(QuickCommandMenu, "Quick Commands");
@@ -107,6 +124,6 @@ public HandlerBackToMenu(Handle menu, MenuAction:action, param1, param2)
 {
 	if (action == MenuAction_Select)
 	{
-		Menu_Test1(param1, Item);
+		Menu_QuickCommand(param1, Item);
 	}
 }
