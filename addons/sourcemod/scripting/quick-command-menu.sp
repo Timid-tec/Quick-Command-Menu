@@ -18,7 +18,6 @@
 #include <sourcemod>
 #include <cstrike>
 #include <timid>
-#include <multicolors>
 
 public Plugin myinfo = 
 {
@@ -30,102 +29,86 @@ public Plugin myinfo =
 }
 
 
-/* Char Values */
-char qcpath[PLATFORM_MAX_PATH];
+/* Global Handles */
+Handle gMenu;
+Handle kv;
 
-/* Int Values */
-Item = 0;
+char gCmdResponse[128][256];
 
 public void OnPluginStart()
 {
 	RegConsoleCmd("sm_qc", Menu_QuickCommand, "Opens the Quick-Command menu");
 	
-	BuildPath(Path_SM, qcpath, sizeof(qcpath), "configs/quickcommands.cfg");
+	/* load the key values on plugin start */
+	ParseKV();
 }
 
 public Action Menu_QuickCommand(int client, int args)
 {
-	Handle QuickCommandMenu = CreateMenu(MenuHandler1);
-	SetMenuTitle(QuickCommandMenu, "Quick Commands");
+	DisplayMenu(gMenu, client, 15);
 	
-	Handle kv = CreateKeyValues("quickcommands");
-	FileToKeyValues(kv, qcpath);
+	return Plugin_Handled;
+}
+
+public int MenuHandler1(Menu menu, MenuAction action, int client, int choice)
+{
+	switch (action)
+	{
+		case MenuAction_Select:
+		{
+			char info[256];
+			char buffer[256];
+			Format(buffer, sizeof(buffer), "%s", gCmdResponse[choice]);
+			menu.GetItem(choice, info, sizeof(info));
+			//Item = GetMenuSelectionPosition();
+			FakeClientCommand(client, info);
+			//PrintToChatAll("[QCDebug] choice = %i buffer = %s", choice, buffer);
+			CPrintToChat(client, buffer);
+		}
+		case MenuAction_End:
+		{
+			
+		}
+	}
+}
+
+public void ParseKV()
+{
+	/* find the path */
+	char path[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM, path, sizeof(path), "configs/quickcommands.cfg");
+	
+	kv = CreateKeyValues("quickcommands");
+	FileToKeyValues(kv, path);
 	
 	if (!KvGotoFirstSubKey(kv))
 	{
-		SetFailState("Unable to find clantags section in file %s", qcpath);
-		return Plugin_Handled;
+		SetFailState("Unable to find config section in file %s", path);
+		return;
 	}
 	
-	char QuickCommandNumber[64];
-	char QuickCommandName[256];
 	
-	do
-	{
-		KvGetSectionName(kv, QuickCommandNumber, sizeof(QuickCommandNumber));
-		KvGetString(kv, "name", QuickCommandName, sizeof(QuickCommandName));
+	
+	gMenu = CreateMenu(MenuHandler1);
+	int cmdNum = 0;
+	//char sCmdNum = 0;
+	char cmdCMD[32];
+	char cmdName[32];
+	char cmdResponse[128];
+	
+	do {
+		//IntToString(cmdNum, sCmdNum, sizeof(sCmdNum);
+		//KvGetSectionName(kv, sCmdNum, sizeof(sCmdNum));
+		KvGetString(kv, "name", cmdName, sizeof(cmdName));
+		KvGetString(kv, "command", cmdCMD, sizeof(cmdCMD));
+		KvGetString(kv, "chatprint", cmdResponse, sizeof(cmdResponse));
 		
-		AddMenuItem(QuickCommandMenu, QuickCommandNumber, QuickCommandName);
+		//PrintToChatAll("%s", cmdResponse);
 		
-		
+		SetMenuTitle(gMenu, "Quick Commands");
+		AddMenuItem(gMenu, cmdCMD, cmdName);
+		Format(gCmdResponse[cmdNum], sizeof(cmdResponse), cmdResponse);
+		cmdNum++;
 	} while (KvGotoNextKey(kv));
 	CloseHandle(kv);
-	
-	DisplayMenuAtItem(QuickCommandMenu, client, args, 15);
-	
-	return Plugin_Continue;
-}
-
-public int MenuHandler1(Handle menu, MenuAction action, int param1, int param2)
-{
-	if (action == MenuAction_Select)
-	{
-		Handle kv = CreateKeyValues("quickcommands");
-		FileToKeyValues(kv, qcpath);
-		
-		if (!KvGotoFirstSubKey(kv))
-		{
-			CloseHandle(menu);
-		}
-		
-		char buffer[256];
-		char choice[256];
-		GetMenuItem(menu, param2, choice, sizeof(choice));
-		
-		do
-		{
-			KvGetSectionName(kv, buffer, sizeof(buffer));
-			if (StrEqual(buffer, choice))
-			{
-				char quickCommand[256];
-				char quickCommandName[256];
-				char quickCommandChat[256];
-				KvGetString(kv, "name", quickCommandName, sizeof(quickCommandName));
-				KvGetString(kv, "command", quickCommand, sizeof(quickCommand));
-				KvGetString(kv, "chatprint", quickCommandChat, sizeof(quickCommandChat));
-				
-				Item = GetMenuSelectionPosition();
-				LoopIngameClients(i)
-				{
-					FakeClientCommand(i, quickCommand);
-					CPrintToChat(i, quickCommandChat);
-				}
-				
-			}
-		} while (KvGotoNextKey(kv));
-		CloseHandle(kv);
-	}
-	else if (action == MenuAction_End)
-	{
-		CloseHandle(menu);
-	}
-}
-
-
-public HandlerBackToMenu(Handle menu, MenuAction:action, param1, param2)
-{
-	if (action == MenuAction_Select)
-	{
-		Menu_QuickCommand(param1, Item);
-	}
-}
+} 

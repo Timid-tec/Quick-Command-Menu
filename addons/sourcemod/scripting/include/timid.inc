@@ -1,7 +1,6 @@
 #if defined _crabstocks_included
 #endinput
 #endif
-#define _crabstocks_included
 #pragma semicolon 1
 #pragma newdecls required
 
@@ -82,6 +81,21 @@ stock void CPrintToChatAll(char[] msg)
 		}
 	}
 	PrintToChatAll("\x01\x0B%s",message);
+}
+
+stock void CPrintToChat(int client, char[] msg)
+{
+	char message[MSG_LENGTH]; 
+	strcopy(message, sizeof(message), msg);
+	
+	for (int k = 0; k < sizeof(g_ColorCheck); k++)
+	{
+		if (StrContains(message, g_ColorCheck[k]) != -1)
+		{
+			ReplaceString(message, sizeof(message), g_ColorCheck[k], g_ColorReplace[k]);
+		}
+	}
+	PrintToChat(client, "\x01\x0B%s",message);
 }
 
 stock bool IsWarmup()
