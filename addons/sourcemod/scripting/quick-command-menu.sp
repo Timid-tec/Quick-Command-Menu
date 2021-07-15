@@ -24,7 +24,7 @@ public Plugin myinfo =
 	name = "Quick Command Menu", 
 	author = PLUGIN_AUTHOR, 
 	description = "Quick Command Menu configure plugin all inside (configs/quickcommands.cfg)", 
-	version = PLUGIN_VERSION, 
+	version = "4.2.1", 
 	url = "https://steamcommunity.com/id/MrTimid/"
 }
 
