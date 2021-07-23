@@ -35,4 +35,6 @@ A source mod plugin simply made to make a quick-command menu easily changeable.
 
 | Version | Change-Log          |
 | ------- | ------------------ |
+| 4.2.1   | Fix plugin to be less memory enticing|
 | 4.2.0   | Added plugin to GitHub|
+
