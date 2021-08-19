@@ -19,6 +19,9 @@
 #include <cstrike>
 #include <timid>
 
+//Quick Commands (Description)
+#define Description "#Description"
+
 public Plugin myinfo = 
 {
 	name = "Quick Command Menu", 
@@ -27,7 +30,6 @@ public Plugin myinfo =
 	version = "4.2.1", 
 	url = "https://steamcommunity.com/id/MrTimid/"
 }
-
 
 /* Global Handles */
 Handle gMenu;
@@ -64,12 +66,19 @@ public int MenuHandler1(Menu menu, MenuAction action, int client, int choice)
 			FakeClientCommand(client, info);
 			//PrintToChatAll("[QCDebug] choice = %i buffer = %s", choice, buffer);
 			CPrintToChat(client, buffer);
+			
+			if (StrEqual(info, Description))
+			{
+				return ITEMDRAW_DISABLED;
+			}
 		}
 		case MenuAction_End:
 		{
 			
 		}
 	}
+	
+	return 0;
 }
 
 public void ParseKV()
@@ -95,6 +104,7 @@ public void ParseKV()
 	char cmdCMD[32];
 	char cmdName[32];
 	char cmdResponse[128];
+	char cmdDescription[128];
 	
 	do {
 		//IntToString(cmdNum, sCmdNum, sizeof(sCmdNum);
@@ -102,11 +112,13 @@ public void ParseKV()
 		KvGetString(kv, "name", cmdName, sizeof(cmdName));
 		KvGetString(kv, "command", cmdCMD, sizeof(cmdCMD));
 		KvGetString(kv, "chatprint", cmdResponse, sizeof(cmdResponse));
+		KvGetString(kv, "description", cmdDescription, sizeof(cmdDescription));
 		
 		//PrintToChatAll("%s", cmdResponse);
 		
 		SetMenuTitle(gMenu, "Quick Commands");
 		AddMenuItem(gMenu, cmdCMD, cmdName);
+		AddMenuItem(gMenu, Description, cmdDescription);
 		Format(gCmdResponse[cmdNum], sizeof(cmdResponse), cmdResponse);
 		cmdNum++;
 	} while (KvGotoNextKey(kv));
