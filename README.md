@@ -17,7 +17,7 @@ A source mod plugin simply made to make a quick-command menu easily changeable.
 - Configure settings by editing /addons/sourcemod/configs/quickcommands.cfg
 
 ## Example
-
+```
 		"quickcommand"
 		{
 			"1"
@@ -31,7 +31,7 @@ A source mod plugin simply made to make a quick-command menu easily changeable.
 				"chatprint" "{grey}「{purple}MoonGlow{grey}」 {purple}https://discord.com/invite/Y9t9tA3"
 			}
 		}
-
+```
 ## Updates
 
 | Version | Change-Log          |
