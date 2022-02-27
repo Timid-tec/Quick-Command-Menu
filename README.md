@@ -1,21 +1,22 @@
 # Quick-Command-Menu
 A source mod plugin simply made to make a quick-command menu easily changeable.
 
-# Custom Types for menu
+## Custom Types for menu
 - name: Item name to display in menu
 - command: Fake client command
 - chatprint: Print chat message
 
-# Usable colors
+## Usable colors
 - {default}, {darkred}, {green}, {red}, {blue}, {lime}, {lightred}, {purple}, {grey}, {yellow}, {orange}. {bluegrey}, {lightblue}, {darkblue}, {grey2}, {lightred2}
 
-# Game Supported
+## Game Supported
 - CS:GO
 
-# How to Install
-- Donwload Quick-Command-Menu.smx and put into /csgo/addons/sourcemod/plugins
+## How to Install
+- Donwload Quick-Command-Menu.zip and decompile the .zip, then add Quick-Command-Menu in /csgo/addons/sourcemod/plugins/
 - Configure settings by editing /addons/sourcemod/configs/quickcommands.cfg
-# Example
+
+## Example
 
 		"quickcommand"
 		{
@@ -31,7 +32,7 @@ A source mod plugin simply made to make a quick-command menu easily changeable.
 			}
 		}
 
-# Updates
+## Updates
 
 | Version | Change-Log          |
 | ------- | ------------------ |
