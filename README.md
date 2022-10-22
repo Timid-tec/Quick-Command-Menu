@@ -1,4 +1,6 @@
-# Quick-Command-Menu
+<p align="center">
+  <a href="https://github.com/DenverCoder1/readme-typing-svg"><img src="https://readme-typing-svg.herokuapp.com?size=21&color=F7E7E5&background=F8000000&lines=Quick+Command+Menu&center=true&width=500&height=50"></a>
+   </p>
 A source mod plugin simply made to make a quick-command menu easily changeable.
 
 ## Custom Types for menu
