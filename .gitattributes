@@ -1,0 +1,7 @@
+* text=auto
+
+*.cfg text eol=lf
+*.inc text eol=lf
+*.md text eol=lf
+*.sp text eol=lf
+*.smx binary
