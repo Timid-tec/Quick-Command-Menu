@@ -15,6 +15,8 @@ A lightweight SourceMod plugin for CS:GO that builds an in-game command menu fro
 - SourceMod 1.10 or newer
 - Counter-Strike: Global Offensive
 
+The bundled `quick-command-menu.smx` is compiled with SourceMod 1.12.0.7041.
+
 ## Installation
 
 1. Copy the included `addons` directory into the server's `csgo` directory.
